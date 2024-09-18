@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE_NAME = 'calculator'
+        DOCKER_IMAGE_NAME = 'calculator-miniproject'
         GITHUB_REPO_URL = 'https://github.com/SilverSurge/CalculatorMiniProject.git'
     }
     
