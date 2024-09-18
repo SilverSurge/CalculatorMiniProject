@@ -1,0 +1,23 @@
+---
+- name: Calculator MiniProject
+  hosts: localhost
+  remote_user: silver
+  become: false
+  tasks:
+    - name: Pull Docker Image
+      docker_image:
+        name: "silversurge/calculator-miniproject"
+        source: pull
+      register: docker_pull_result
+
+    - name: Display Docker Pull Result
+      debug:
+        var: docker_pull_result
+        
+    - name: Start Docker Service
+      service:
+        name: docker
+        state: started
+
+    - name: Running Container
+      shell: docker run -it -d --name=calculator silversurge/calculator-miniproject

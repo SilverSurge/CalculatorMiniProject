@@ -53,6 +53,17 @@ pipeline {
                 }
             }
         }
+
+        stage("Deploy") {
+            steps {
+                script {
+                    ansiblePlaybook(
+                        playbook: 'deploy.yml',
+                        inventory: 'inventory.ini'
+                    )
+                }
+            }
+        }
     }
-    
+
 }
