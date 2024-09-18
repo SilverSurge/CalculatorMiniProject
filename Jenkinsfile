@@ -33,9 +33,11 @@ pipeline {
             }
         }
 
-        stage("Dockerize"){
-            // build the docker image
-            docker.build("${DOCKER_IMAGE_NAME}", '.')
+        stage("Dockerize") {
+            steps {
+                // build the docker image
+                docker.build("${DOCKER_IMAGE_NAME}", '.')
+            }
         }
     }
 }
