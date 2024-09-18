@@ -1,23 +1,31 @@
 pipeline {
     agent any
+
+    environment {
+        GITHUB_REPO_URL = 'https://github.com/SilverSurge/CalculatorMiniProject.git'
+    }
     
     stages {
     
-        stage("stage 1") {
+        stage("Checkout") {
             steps {
-                echo "running stage 1"
+                git branch: 'main', url: "${GITHUB_REPO_URL}"
             }
         }
         
-        stage("stage 2") {
+        stage("Build") {
             steps {
-                echo "running stage 2"
+                dir("Calculator") {
+                    sh 'mvn clean package'
+                }
             }   
         }
         
-        stage("stage 3") {
+        stage("Test") {
             steps {
-                echo "running stage 3"
+                dir("Calculator") {
+                    sh 'mvn test'
+                }
             }
         }
     }
