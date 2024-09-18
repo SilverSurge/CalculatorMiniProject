@@ -10,33 +10,41 @@ pipeline {
     
         stage("Checkout") {
             steps {
-                // get the github branch
-                git branch: 'main', url: "${GITHUB_REPO_URL}"
+                script {
+                    // get the github branch
+                    git branch: 'main', url: "${GITHUB_REPO_URL}"
+                }
             }
         }
         
         stage("Build") {
             steps {
-                // create the jar file
-                dir("Calculator") {
-                    sh 'mvn clean package'
+                script {
+                    // create the jar file
+                    dir("Calculator") {
+                        sh 'mvn clean package'
+                    }
                 }
             }   
         }
         
         stage("Test") {
             steps {
-                // run unit tests
-                dir("Calculator") {
-                    sh 'mvn test'
+                script {
+                    // run unit tests
+                    dir("Calculator") {
+                        sh 'mvn test'
+                    }
                 }
             }
         }
 
         stage("Dockerize") {
             steps {
-                // build the docker image
-                docker.build("${DOCKER_IMAGE_NAME}", '.')
+                script {
+                    // build the docker image
+                    docker.build("${DOCKER_IMAGE_NAME}", '.')
+                }
             }
         }
     }
