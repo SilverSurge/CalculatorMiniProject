@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        DOCKER_IMAGE_NAME = 'calculator'
         GITHUB_REPO_URL = 'https://github.com/SilverSurge/CalculatorMiniProject.git'
     }
     
@@ -9,12 +10,14 @@ pipeline {
     
         stage("Checkout") {
             steps {
+                // get the github branch
                 git branch: 'main', url: "${GITHUB_REPO_URL}"
             }
         }
         
         stage("Build") {
             steps {
+                // create the jar file
                 dir("Calculator") {
                     sh 'mvn clean package'
                 }
@@ -23,10 +26,16 @@ pipeline {
         
         stage("Test") {
             steps {
+                // run unit tests
                 dir("Calculator") {
                     sh 'mvn test'
                 }
             }
+        }
+
+        stage("Dockerize"){
+            // build the docker image
+            docker.build("${DOCKER_IMAGE_NAME}", '.')
         }
     }
 }
