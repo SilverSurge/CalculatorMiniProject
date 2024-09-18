@@ -44,8 +44,15 @@ pipeline {
                 script {
                     // build the docker image
                     docker.build("${DOCKER_IMAGE_NAME}", '.')
+
+                    // push the image to docker hub
+                    docker.withRegistry('', 'DockerHubCred') {
+                        sh 'docker tag calculator-miniproject silversurge/calculator-miniproject:latest'
+                        sh 'docker push silversurge/calculator-miniproject'
+                    }
                 }
             }
         }
     }
+    
 }
