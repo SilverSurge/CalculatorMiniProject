@@ -4,6 +4,12 @@
   remote_user: silver
   become: false
   tasks:
+
+    - name: Start Docker Service
+      service:
+        name: docker
+        state: started
+
     - name: Pull Docker Image
       docker_image:
         name: "silversurge/calculator-miniproject"
@@ -13,11 +19,15 @@
     - name: Display Docker Pull Result
       debug:
         var: docker_pull_result
-        
-    - name: Start Docker Service
-      service:
-        name: docker
-        state: started
+
+    - name: Check if "calculator" container exists
+      docker_container:
+        name: calculator
+        state: absent
+      register: container_check
+
+    - name: Prune Previous Images
+      shell:  docker image prune -f 
 
     - name: Running Container
       shell: docker run -it -d --name=calculator silversurge/calculator-miniproject
