@@ -1,5 +1,2 @@
 # CalculatorMiniProject 
-
-I use the docker pipeline in this project. just trying to figure out the webhook part.
-
-again trying to figure out the webhook part.
+Creating a simple DevOps based calculator using Maven and other tools.
