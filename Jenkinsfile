@@ -64,14 +64,6 @@ pipeline {
                 }
             }
         }
-
-        stage("Email") {
-            steps {
-                script {
-                    mail bcc: '', body: 'Hello, This is an email from jenkins pipeline.', cc: '', from: '', replyTo: '', subject:​​ 'EmailJenkinsPipeline', to: 'deepkumarpatel471@gmail.com';
-                }
-            }
-        }
     }
 
 }
