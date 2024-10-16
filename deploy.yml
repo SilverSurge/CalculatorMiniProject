@@ -26,8 +26,8 @@
     #     state: absent
     #   register: container_check
 
-    - name: "calculator exists"
-      shell: if docker inspect calculator > /dev/null 2>&1; then docker stop calculator; docker container prune -f; fi
+    # - name: "calculator exists"
+    #   shell: if docker inspect calculator > /dev/null 2>&1; then docker stop calculator; docker container prune -f; fi
     
     - name: Prune Previous Images
       shell:  docker image prune -f 
