@@ -5,10 +5,9 @@ pipeline {
         DOCKER_IMAGE_NAME = 'calculator-miniproject'
         GITHUB_REPO_URL = 'https://github.com/SilverSurge/CalculatorMiniProject.git'
     }
-    
+
     stages {
-    
-        stage("Checkout") {
+        stage('Checkout') {
             steps {
                 script {
                     // get the github branch
@@ -16,30 +15,30 @@ pipeline {
                 }
             }
         }
-        
-        stage("Build") {
+
+        stage('Build') {
             steps {
                 script {
                     // create the jar file
-                    dir("Calculator") {
+                    dir('Calculator') {
                         sh 'mvn clean package'
                     }
                 }
-            }   
+            }
         }
-        
-        stage("Test") {
+
+        stage('Test') {
             steps {
                 script {
                     // run unit tests
-                    dir("Calculator") {
+                    dir('Calculator') {
                         sh 'mvn test'
                     }
                 }
             }
         }
 
-        stage("Dockerize") {
+        stage('Dockerize') {
             steps {
                 script {
                     // build the docker image
@@ -54,7 +53,7 @@ pipeline {
             }
         }
 
-        stage("Deploy") {
+        stage('Deploy') {
             steps {
                 script {
                     ansiblePlaybook(
@@ -69,9 +68,9 @@ pipeline {
     post {
         failure {
             script {
-                    emailext body: 'Build Breaking Body', subject: 'Build Breaking Subject', to: 'deepkumarpatel471@gmail.com'
-}
+                emailext body: 'Build Breaking Body', subject: 'Build Breaking Subject', to: 'deepkumarpatel471@gmail.com'
+                mail bcc: '', body: 'Break Build Mail Body', cc: '', from: '', replyTo: '', subject: 'Break Build Mail Subject', to: 'deepkumarpatel471@gmail.com'
+            }
         }
     }
-
 }
