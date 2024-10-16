@@ -70,18 +70,8 @@ pipeline {
          changed {
             script {
                 if (currentBuild.currentResult == 'FAILURE') { 
-                    emailext subject: '$DEFAULT_SUBJECT',
-                        body: '$DEFAULT_CONTENT',
-                        recipientProviders: [
-                            [$class: 'CulpritsRecipientProvider'],
-                            [$class: 'DevelopersRecipientProvider'],
-                            [$class: 'RequesterRecipientProvider'] 
-                        ], 
-                        replyTo: '$DEFAULT_REPLYTO',
-                        to: '$DEFAULT_RECIPIENTS'
+                    emailext body: 'Build Breaking Body', subject: 'Build Breaking Subject', to: 'deepkumarpatel471@gmail.com'
                 }
-
-                sh 'echo $DEFAULT_CONTENT'
             }
         }
     }
