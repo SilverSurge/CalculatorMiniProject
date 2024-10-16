@@ -67,7 +67,7 @@ pipeline {
     }
 
     post {
-         changed {
+         always {
             script {
                 if (currentBuild.currentResult == 'FAILURE') { 
                     emailext body: 'Build Breaking Body', subject: 'Build Breaking Subject', to: 'deepkumarpatel471@gmail.com'
