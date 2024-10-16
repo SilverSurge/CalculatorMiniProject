@@ -80,6 +80,8 @@ pipeline {
                         replyTo: '$DEFAULT_REPLYTO',
                         to: '$DEFAULT_RECIPIENTS'
                 }
+
+                sh 'echo $DEFAULT_CONTENT'
             }
         }
     }
