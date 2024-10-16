@@ -20,11 +20,11 @@
       debug:
         var: docker_pull_result
 
-    # - name: Check if "calculator" container exists
-    #   docker_container:
-    #     name: calculator
-    #     state: absent
-    #   register: container_check
+    - name: Check if "calculator" container exists
+      docker_container:
+        name: calculator
+        state: absent
+      register: container_check
 
     # - name: "calculator exists"
     #   shell: if docker inspect calculator > /dev/null 2>&1; then docker stop calculator; docker container prune -f; fi
