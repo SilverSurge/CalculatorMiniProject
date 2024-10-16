@@ -69,7 +69,7 @@ pipeline {
         failure {
             script {
                 emailext body: 'Build Breaking Body', subject: 'Build Breaking Subject', to: 'deepkumarpatel471@gmail.com'
-                mail bcc: '', body: 'Break Build Mail Body', cc: '', from: '', replyTo: '', subject: 'Break Build Mail Subject', to: 'deepkumarpatel471@gmail.com'
+                mail bcc: '', body: 'Break Build Mail Body', cc: '', from: 'deepkumarpatel471@gmail.com', replyTo: '', subject: 'Break Build Mail Subject', to: 'deepkumarpatel471@gmail.com'
             }
         }
     }
